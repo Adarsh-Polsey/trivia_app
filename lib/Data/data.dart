@@ -1,8 +1,5 @@
-// import 'package:http/http.dart' as http;
-//
-// Future <http.Response> fetchQuests(){
-//   return
-// }
+
+// var Quests = await http.get(Uri.parse('https://opentdb.com/api.php?amount=10&category=15&difficulty=easy&type=boolean'));
 var map = {
   "response_code": 0,
   "results": [

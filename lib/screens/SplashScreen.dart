@@ -11,17 +11,16 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-
   void initState() async {
-    var Quests = await http.get(Uri.parse('https://opentdb.com/api.php?amount=10&category=15&difficulty=easy&type=boolean'));
-    Timer(Duration(milliseconds: 800),
-            ()=>Navigator.pushReplacement(context,
-            MaterialPageRoute(builder:
-                (context) => HomeScreen()
-            )
-        ));
+    Timer(Duration(milliseconds: 800), ()async {
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => HomeScreen()));
+      var Quests = await http.get(Uri.parse('https://opentdb.com/api.php?amount=10&category=15&difficulty=easy&type=boolean'));
+    var ques=Quests.body;
+    });
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,7 +35,7 @@ class _SplashScreenState extends State<SplashScreen> {
               decoration: const BoxDecoration(
                   shape: BoxShape.circle,
                   gradient: LinearGradient(
-                      colors: [Color(0xCC2C3333),Color(0xFF0E8388)])),
+                      colors: [Color(0xCC2C3333), Color(0xFF0E8388)])),
               child: const Icon(
                 Icons.person,
                 color: Colors.white,
