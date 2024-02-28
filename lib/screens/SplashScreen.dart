@@ -11,12 +11,10 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  void initState() async {
+  void initState() {
     Timer(Duration(milliseconds: 800), ()async {
       Navigator.pushReplacement(
           context, MaterialPageRoute(builder: (context) => HomeScreen()));
-      var Quests = await http.get(Uri.parse('https://opentdb.com/api.php?amount=10&category=15&difficulty=easy&type=boolean'));
-    var ques=Quests.body;
     });
     super.initState();
   }
