@@ -22,13 +22,16 @@ class _HomeScreenState extends State<HomeScreen> {
     ,Quiz(question: "The Great Pyramid of Giza was built by the Pharaoh Khufu.", answer: true)
     ,Quiz(question: "The Grand Canyon was formed by a volcanic eruption.", answer: false)];
   int qsnNo=0;
-  Icon true_icon=Icon(Icons.done);
-  Icon false_icon = Icon(Icons.clear);
-   void nextQsn(bool stat){
+  bool? stat;
+  Icon? stat_icon;
+   void nextQsn(bool clickstat){
+     if(clickstat==quests[qsnNo].answer)
+       stat_icon=Icon(Icons.done);
+     else
+       stat_icon = Icon(Icons.clear);
      setState((){
      if(qsnNo<quests.length-1){
        qsnNo++;
-       print(qsnNo);
      }});
    }
   // String getQns(){
@@ -48,14 +51,13 @@ class _HomeScreenState extends State<HomeScreen> {
               padding: const EdgeInsets.all(20.0),
               child: Column(
                 children: [
-                  ElevatedButton(onPressed: (){
-                    nextQsn(true);
-                  }, child: Text('True'),style: ElevatedButton.styleFrom(primary: Colors.green,fixedSize: Size(500, 50)),),
+                  ElevatedButton(onPressed: (){nextQsn(true);}, child: Text('True'),style: ElevatedButton.styleFrom(primary: Colors.green,fixedSize: Size(500, 50)),),
                   SizedBox(height: 10,),
                   ElevatedButton(onPressed: (){nextQsn(false);}, child: Text('False'),style: ElevatedButton.styleFrom(primary: Colors.redAccent,fixedSize: Size(500, 50)),),
                 ],
               ),
             ),
+            ListView.builder(physics: const NeverScrollableScrollPhysics(),shrinkWrap: true,scrollDirection:Axis.horizontal,itemBuilder: (context,index){return Container(height:10,width: 10,color: Colors.amber,);},itemCount: quests.length,),
           ],
         ),
       ),
